@@ -1,0 +1,9 @@
+{
+  "name": "Auto Video Translator PRO",
+  "short_name": "Video Translator",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#111827",
+  "description": "AI Burmese video translation and dubbing"
+}
