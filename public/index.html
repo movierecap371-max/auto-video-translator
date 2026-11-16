@@ -23,7 +23,9 @@ video{width:100%;max-height:460px;background:#000;border-radius:12px;margin:8px 
 <body><main>
 <header class="top"><div class="row"><div><h1>🎬 Auto Video Translator PRO</h1><p>မြန်မာဘာသာပြန် · AI Dubbing · Subtitle Editor</p></div><span class="pill">Android + Web</span></div></header>
 <div id="status"></div>
-<section class="card"><h2>1. AI Provider</h2><div class="row"><select id="provider"><option value="openai">OpenAI</option><option value="gemini">Google Gemini</option></select><select id="voice"><option value="alloy">Alloy</option><option value="nova">Nova</option><option value="shimmer">Shimmer</option><option value="echo">Echo</option></select></div><p>API Key များကို Server ရှိ .env ဖိုင်တွင်သာ ထည့်ပါ။ ဖုန်း Browser ထဲတွင် မသိမ်းပါ။</p></section>
+<section class="card"><h2>1. AI Provider</h2><div class="row"><select id="provider">
+  <option value="groq">Groq (အခမဲ့ကန့်သတ်ချက်ရှိ)</option>
+</select><select id="voice"><option value="alloy">Alloy</option><option value="nova">Nova</option><option value="shimmer">Shimmer</option><option value="echo">Echo</option></select></div><p>API Key များကို Server ရှိ .env ဖိုင်တွင်သာ ထည့်ပါ။ ဖုန်း Browser ထဲတွင် မသိမ်းပါ။</p></section>
 <section class="card"><h2>2. ဗီဒီယိုရွေးချယ်ရန်</h2><input id="videoFile" type="file" accept="video/mp4,video/webm,video/quicktime"><div class="stage"><video id="player" controls playsinline></video><div id="subOverlay"></div></div><div class="row"><button id="processBtn">✨ AI ဘာသာပြန်မည်</button><button class="secondary" id="installBtn" hidden>📲 Install App</button></div></section>
 <section class="card"><h2>3. စာတန်းထိုးများ <span class="pill" id="count">0</span></h2><div class="row"><button class="secondary" id="srtBtn">SRT ဒေါင်းလုဒ်</button><button class="secondary" id="playVoiceBtn">🔊 အသံစမ်း</button></div><div id="segments"></div></section>
 <section class="card"><h2>4. Project</h2><button class="secondary" id="saveBtn">Project JSON သိမ်းမည်</button><p>မှတ်ချက် - ဒီ Starter Version မှာ SRT နဲ့ Project JSON Export ပါဝင်ပါတယ်။ Burn-in MP4 Export ကို FFmpeg rendering worker နဲ့ production server တွင် ထပ်မံချိတ်ဆက်ရန် လိုအပ်ပါတယ်။</p></section>
