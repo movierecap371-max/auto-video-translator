@@ -1,4 +1,4 @@
-const $ = id => document.getElementById(id);
+file $ = id => document.getElementById(id);
 let file = null, url = null, segments = [], installPrompt = null, voice = "female";
 
 function status(s) { $("status").style.display = "block"; $("status").textContent = s; }
@@ -7,8 +7,10 @@ $("videoFile").addEventListener("change", e => {
   file = e.target.files[0];
   if (!file) return;
   if (url) URL.revokeObjectURL(url);
-  url = URL.createObjectURL(file);
-  $("player").src = url;
+
+url = URL.createObjectURL(file);
+  
+  $("player").src = uurl
   segments = [];
   render();
 });
@@ -65,12 +67,27 @@ async function speakBurmese(text) {
       body: JSON.stringify({ text, voice })
     });
     if (!r.ok) { const d = await r.json().catch(() => ({})); throw Error(d.error || "အသံထုတ်မရပါ။"); }
-    const blob = await r.blob(), audioUrl = URL.createObjectURL(blob), audio = new Audio(audioUrl);
-    await new Promise((resolve, reject) => {
-      audio.onended = resolve; audio.onerror = () => reject(Error("အသံဖွင့်မရပါ။"));
-      audio.play().catch(reject);
-    });
-    URL.revokeObjectURL(audioUrl); status("အသံဖွင့်ပြီးပါပြီ။");
+    
+const contentType = r.headers.get("content-type") || "";
+if (!contentType.includes("audio/")) {
+  const errorText = await r.text();
+  throw Error("အသံဖိုင်မဟုတ်ပါ။ Server: " + errorText.slice(0, 200));
+}
+const blob = await r.blob();
+const audioUrl = URL.createObjectURL(blob);
+const audio = new Audio(audioUrl);
+
+try {
+  await audio.play();
+  await new Promise((resolve, reject) => {
+    audio.onended = resolve;
+    audio.onerror = () => reject(Error("အသံဖွင့်မရပါ။"));
+  });
+} finally {
+  URL.revokeObjectURL(audioUrl);
+}
+status("အသံဖွင့်ပြီးပါပြီ။");
+    
   } catch (e) { status("အသံအမှား: " + e.message); }
 }
 
