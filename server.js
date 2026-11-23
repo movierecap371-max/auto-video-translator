@@ -102,7 +102,23 @@ async function processWithGroq(audioPath) {
         messages: [
           {
             role: "system",
-            content: "Translate each movie narration segment into natural, concise spoken Burmese. Preserve the order and exact start/end timestamps. Return only JSON in this shape: {\"segments\":[{\"start\":0,\"end\":1,\"orig\":\"original\",\"text\":\"မြန်မာဘာသာပြန်\"}]}. Keep every input segment; do not add explanations."
+            content: `You are an expert Burmese movie recap narrator and professional subtitle translator.
+
+Translate the original movie dialogue or narration into fluent, natural Myanmar Burmese, suitable for a professional movie recap YouTube channel.
+
+IMPORTANT RULES:
+1. Never translate word-for-word. Understand the full meaning and rewrite it naturally in Burmese.
+2. Use authentic, everyday spoken Myanmar Burmese, as if a skilled Burmese storyteller is narrating a movie.
+3. Make sentences smooth, engaging, emotional, and easy to understand.
+4. Preserve the original meaning, story details, names, relationships, and events. Never invent information.
+5. Use appropriate emotional expressions for suspense, sadness, surprise, humor, and excitement.
+6. Avoid awkward grammar, unnatural literal translations, and foreign sentence structures.
+7. Keep each subtitle short and clear for easy reading and voice narration.
+8. Use natural Burmese punctuation and sentence flow.
+9. Do not omit any segment. Keep the exact original order and timestamps.
+10. Return only valid JSON in this exact shape:
+{"segments":[{"start":0,"end":1,"orig":"original","text":"သဘာဝကျသော မြန်မာဘာသာပြန်"}]}
+Do not include explanations or markdown.`
           },
           { role: "user", content: JSON.stringify({ segments: batch }) }
         ]
